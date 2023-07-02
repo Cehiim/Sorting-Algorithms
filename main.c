@@ -1,6 +1,6 @@
 int main(void) {
-  int *v, n = 9, end = 0;
-  srand (time(NULL));
+  int *v, n = 9, end = 0; // It is recomended to keep the 'n' value smaller than 10, otherwise it can mess up the chart visualization
+  srand (time(NULL)); // Get a random seed for every run, therefore the array will be always different
   v = getArray(n);
   while(end == 0){
     int *cpy, sort, ok = 0;
