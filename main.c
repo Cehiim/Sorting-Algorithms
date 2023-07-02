@@ -1,8 +1,3 @@
-#include <stdio.h> // Input and output
-#include <stdlib.h> // Memory manageament and random function
-#include <unistd.h> // Sleep function
-#include <time.h> // Time function to generate random seeds
-
 int main(void) {
   int *v, n = 9, end = 0;
   srand (time(NULL));
