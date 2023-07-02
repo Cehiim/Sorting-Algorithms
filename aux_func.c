@@ -1,3 +1,8 @@
+#include <stdio.h> // Input and output
+#include <stdlib.h> // Memory manageament and random function
+#include <unistd.h> // Sleep function
+#include <time.h> // Time function to generate random seeds
+
 int isRepeated(int *v, int end, int n){
   for(int x = 0; x < end; x++){
     if(v[x] == n){
