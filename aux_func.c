@@ -74,7 +74,7 @@ void *swap(int *v, int pos1, int pos2){ // Swap the numbers of two positions
 void confirm(){ // Stop the program until the user confirms
   int ok = 0;
   while(ok == 0){
-    puts("Press 1 to continue");
+    puts("Continue?");
     scanf("%i", &ok);
   }
 }
