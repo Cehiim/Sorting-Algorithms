@@ -3,7 +3,7 @@
 #include <unistd.h> // Sleep function
 #include <time.h> // Time function to generate random seeds
 
-int isRepeated(int *v, int end, int n){
+int isRepeated(int *v, int end, int n){ // Check if a number is already in an array, return 1 if it is or 0 if it is not
   for(int x = 0; x < end; x++){
     if(v[x] == n){
       return 1;
@@ -12,7 +12,7 @@ int isRepeated(int *v, int end, int n){
   return 0;
 }
 
-int getArray(int size){
+int getArray(int size){ // Return an array with random numbers in
   int *v;
   v = (int*)calloc(size, sizeof(int));
   for(int x = 0; x < size; x++){
@@ -27,7 +27,7 @@ int getArray(int size){
   return v;
 }
 
-int copyArray(int *v, int size){
+int copyArray(int *v, int size){ // Copy the numbers in a array to another
   int *cpy;
   cpy = (int*)calloc(size, sizeof(int));
   for(int x = 0; x < size; x++){
@@ -36,14 +36,14 @@ int copyArray(int *v, int size){
   return cpy;
 }
 
-void showArray(int *v, int size){
+void showArray(int *v, int size){ // Show the numbers in a array
   for(int x = 0; x < size; x++){
     printf("%i ",v[x]);
   }
   puts("\n");
 }
 
-void showChart(int *v, int size){
+void showChart(int *v, int size){ // Show a chart based on the numbers in a array
   usleep(1000 * 200);
   printf("\033c");
   for(int i = size; i > 0; i--){
@@ -65,13 +65,13 @@ void showChart(int *v, int size){
   }
 }
 
-void *swap(int *v, int pos1, int pos2){
+void *swap(int *v, int pos1, int pos2){ // Swap the numbers of two positions
   int aux = v[pos2];
   v[pos2] = v[pos1];
   v[pos1] = aux;
 }
 
-void confirm(){
+void confirm(){ // Stop the program until the user confirms
   int ok = 0;
   while(ok == 0){
     puts("Press 1 to continue");
