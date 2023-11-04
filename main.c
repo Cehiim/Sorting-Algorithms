@@ -63,6 +63,19 @@ int main(void) {
         confirm(&start_time,&end_time);
         break;
       case 5:
+        puts("--> Quick sort");
+        clock_gettime(CLOCK_MONOTONIC, &start_time);
+        quickSort(cpy, 0, n-1, n);
+        clock_gettime(CLOCK_MONOTONIC, &end_time);
+        confirm(&start_time,&end_time);
+        break;
+      case 6:
+        puts("--> Merge sort");
+        break;
+      case 7:
+        puts("--> Heap sort");
+        break;
+      case 8:
         exit = true;
         printf("\033c");
         puts("Program has been ended");
