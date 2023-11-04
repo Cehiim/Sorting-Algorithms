@@ -2,22 +2,23 @@
 #include <stdlib.h> // Memory manageament and random function
 #include <unistd.h> // Sleep function
 #include <time.h> // Time function to generate random seeds
+#include <stdbool.h> // Boolean function
 
-int isRepeated(int *v, int end, int n){ // Check if a number is already in an array, return 1 if it is or 0 if it is not
+bool isRepeated(int *v, int end, int n){
   for(int x = 0; x < end; x++){
     if(v[x] == n){
-      return 1;
+      return true;
     }
   }
-  return 0;
+  return false;
 }
 
-int getArray(int size){ // Return an array with random numbers in
+int *getArray(int size){
   int *v;
   v = (int*)calloc(size, sizeof(int));
   for(int x = 0; x < size; x++){
     int num = rand() % size+1;
-    if(x > 0 && isRepeated(v, size, num) == 1){
+    if(x > 0 && isRepeated(v, size, num)){
       x -= 1;
     }
     else{
@@ -27,7 +28,7 @@ int getArray(int size){ // Return an array with random numbers in
   return v;
 }
 
-int copyArray(int *v, int size){ // Copy the numbers in a array to another
+int *copyArray(int *v, int size){
   int *cpy;
   cpy = (int*)calloc(size, sizeof(int));
   for(int x = 0; x < size; x++){
@@ -36,15 +37,15 @@ int copyArray(int *v, int size){ // Copy the numbers in a array to another
   return cpy;
 }
 
-void showArray(int *v, int size){ // Show the numbers in a array
+void showArray(int *v, int size){
   for(int x = 0; x < size; x++){
     printf("%i ",v[x]);
   }
   puts("\n");
 }
 
-void showChart(int *v, int size){ // Show a chart based on the numbers in a array
-  usleep(1000 * 200);
+void showChart(int *v, int size){
+  usleep(150000);
   printf("\033c");
   for(int i = size; i > 0; i--){
     for(int j = 0; j < size; j++){
@@ -65,14 +66,17 @@ void showChart(int *v, int size){ // Show a chart based on the numbers in a arra
   }
 }
 
-void *swap(int *v, int pos1, int pos2){ // Swap the numbers of two positions
+void *swap(int *v, int pos1, int pos2){
   int aux = v[pos2];
   v[pos2] = v[pos1];
   v[pos1] = aux;
 }
 
-void confirm(){ // Stop the program until the user confirms
+void confirm(struct timespec *start_time, struct timespec *end_time){
+  double elapsed_time;
   int ok = 0;
+  elapsed_time = (end_time->tv_sec - start_time->tv_sec) + (end_time->tv_nsec - start_time->tv_nsec) / 1e9;
+  printf("Elapsed time: %.2f seconds\n", elapsed_time);
   puts("Press 1 to continue");
   while(ok != 1){
     scanf("%i", &ok);
