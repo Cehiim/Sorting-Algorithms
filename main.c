@@ -1,41 +1,71 @@
 int main(void) {
-  int *v, n = 9, end = 0; // It is recomended to keep the 'n' value smaller than 10, otherwise it can mess up the chart visualization
-  srand (time(NULL)); // Get a random seed for every run, therefore the array will be always different
+  int *v, n = 9;
+  bool exit = false;
+  srand (time(NULL));
   v = getArray(n);
-  while(end == 0){
-    int *cpy, sort, ok = 0;
+  while(!exit){
+    struct timespec start_time, end_time;
+    double elapsed_time;
+    int *cpy, option, ok = 0;
     cpy = copyArray(v, n);
     showChart(cpy, n);
+    puts("0. Change number of elements");
     puts("1. Bubble sort");
     puts("2. Insertion sort");
     puts("3. Selection sort");
     puts("4. Shell sort");
-    puts("0. Exit");
-    scanf("%i", &sort);
-  
-    switch(sort){
+    puts("5. Quick sort");
+    puts("6. Merge sort");
+    puts("7. Heap sort");
+    puts("8. Exit");
+    scanf("%i", &option);
+    switch(option){
       case 0:
-        end = 1;
+        puts("");
+        printf("Number of elements: ");
+        int new_n;
+        scanf("%i", &new_n);
+        if(new_n > 1 && new_n <= 50){
+          n = new_n;
+          v = getArray(n);
+          puts("Elements updated");
+        }
+        else{
+          puts("Invalid number");
+        }
         break;
       case 1:
         puts("--> Bubble sort");
-        bubbleSort(cpy, 0, n);
-        confirm();
+        clock_gettime(CLOCK_MONOTONIC, &start_time);
+        bubbleSort(cpy, 1, n);
+        clock_gettime(CLOCK_MONOTONIC, &end_time);
+        confirm(&start_time,&end_time);
         break;
       case 2:
         puts("--> Insertion sort");
+        clock_gettime(CLOCK_MONOTONIC, &start_time);
         insertionSort(cpy, 1, n);
-        confirm();
+        clock_gettime(CLOCK_MONOTONIC, &end_time);
+        confirm(&start_time,&end_time);
         break;
       case 3:
         puts("--> Selection sort");
+        clock_gettime(CLOCK_MONOTONIC, &start_time);
         selectionSort(cpy, 0, n);
-        confirm();
+        clock_gettime(CLOCK_MONOTONIC, &end_time);
+        confirm(&start_time,&end_time);
         break;
       case 4:
         puts("--> Shell sort");
+        clock_gettime(CLOCK_MONOTONIC, &start_time);
         shellSort(cpy, n/2, n);
-        confirm();
+        clock_gettime(CLOCK_MONOTONIC, &end_time);
+        confirm(&start_time,&end_time);
+        break;
+      case 5:
+        exit = true;
+        printf("\033c");
+        puts("Program has been ended");
         break;
       default:
         puts("Invalid option, try again");
